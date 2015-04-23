@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/dwango-js/flexunit-server.svg)](https://travis-ci.org/dwango-js/flexunit-server)
+
+
 flexunit-server
 ===============
 
