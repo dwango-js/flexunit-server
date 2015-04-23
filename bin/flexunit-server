@@ -1,0 +1,54 @@
+#!/usr/bin/env node
+
+var cmder = require('commander');
+var fs = require('fs');
+
+var flexunit = require('../package.json');
+var fuserver = require('../lib');
+
+function main(argv){
+  var prog = cmder.version(flexunit.version)
+    .option('-r, --reporter <name>', 'specify reporter to use')
+    .option('--list-reporters', 'list available reporters')
+    .option('-o, --output <file>', 'specify filename to output result into')
+    .option('-p, --port <port>', 'port number to listen', parseInt)
+    .option('--host <hostname>', 'hostname to listen')
+    .parse(argv);
+
+  if (prog.listReporters) {
+    console.log('Available reporters are:');
+    console.log(Object.keys(fuserver.reporter).join(" "));
+    console.log('Do not specify to output in raw format.');
+    return;
+  }
+
+  var Rep;
+  if (prog.reporter) {
+    Rep = fuserver.reporter[prog.reporter];
+    if (! Rep) {
+      console.log('No reporter named `' + prog.reporter + "'");
+      console.log('Abort.');
+      process.exit(1);
+    }
+  } else {
+    Rep = require('stream').PassThrough;
+  }
+
+  var rep = new Rep();
+
+  var output;
+  if (prog.output) {
+    output = fs.createWriteStream(prog.output);
+  } else {
+    output = process.stdout;
+  }
+
+  rep.pipe(output);
+
+  fuserver.createServer(rep).listen(
+    prog.port || 1024,
+    prog.host || undefined
+  );
+}
+
+main(process.argv);

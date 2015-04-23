@@ -1,0 +1,32 @@
+{
+  "name": "flexunit-server",
+  "version": "1.4.0",
+  "description": "Flexunit Node.js Server",
+  "private": true,
+  "main": "server.js",
+  "dependencies": {
+    "commander": "^2.5.0",
+    "debug": "^2.0.0",
+    "xml2js": "^0.4.4"
+  },
+  "devDependencies": {
+    "mocha": "^1.21.5",
+    "chai": "^1.9.2"
+  },
+  "scripts": {
+    "test": "mocha --reporter spec test/index.js"
+  },
+  "bin": {
+    "flexunit-server": "./bin/flexunit-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:dwango-js/flexunit-server.git"
+  },
+  "keywords": [
+    "flexunit",
+    "test"
+  ],
+  "author": "10sr",
+  "license": "MIT"
+}

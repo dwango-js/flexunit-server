@@ -1,0 +1,9 @@
+<testcase classname='jp.nicovideo::Test1'
+          name='test_fail'
+          time='0.000'
+          status='failure'>
+  <failure message='expected:A but was:B'
+           type='jp.nicovideo::Test1.test_fail' >
+    <![CDATA[]]>
+  </failure>
+</testcase>

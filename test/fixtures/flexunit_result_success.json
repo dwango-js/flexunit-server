@@ -1,0 +1,10 @@
+{
+  "testcase": [
+    {"$": {
+      "classname": "jp.nicovideo::Test2",
+      "name": "test_success",
+      "status": "success",
+      "time": "0.000"
+    }}
+  ]
+}

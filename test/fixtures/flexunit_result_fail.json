@@ -1,0 +1,16 @@
+{
+  "testcase": [
+    {"$": {
+      "classname": "jp.nicovideo::Test1",
+      "name": "test_fail",
+      "status": "failure",
+      "time": "0.000"
+    },
+     "failure": [
+       {"$": {"message": "expected:A but was:B",
+              "type": "jp.nicovideo::Test1.test_fail"
+             }}
+     ]
+    }
+  ]
+}

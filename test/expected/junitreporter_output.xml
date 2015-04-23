@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<testsuite name="FlexunitJunitReporter" tests="1" errors="0" failures="0" time="0.000">
+  <testcase classname="jp.nicovideo::Test2" name="test_success" status="success" time="0.000"/>
+</testsuite>
