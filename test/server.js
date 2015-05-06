@@ -34,12 +34,14 @@ module.exports = function(){
     var server;
     var client;
 
-    before(function(){
+    before(function(done){
       var rep = new PassThrough();
       server = fuserver(rep);
-      server.listen(PORT, HOST);
-      client = net.connect({port: PORT, host: HOST});
-      client.setEncoding('ascii');
+      server.listen(PORT, HOST, function(){
+        client = net.connect({port: PORT, host: HOST});
+        client.setEncoding('ascii');
+        done();
+      });
     });
 
     after(function(){
@@ -61,11 +63,13 @@ module.exports = function(){
     var server;
     var client;
 
-    beforeEach(function(){
+    beforeEach(function(done){
       var rep = new PassThrough();
       server = fuserver(rep);
-      server.listen(PORT, HOST);
-      client = net.connect({port: PORT, host: HOST});
+      server.listen(PORT, HOST, function(){
+        client = net.connect({port: PORT, host: HOST});
+        done();
+      });
     });
 
     afterEach(function(){
@@ -100,12 +104,14 @@ module.exports = function(){
     var client;
     var rep;
 
-    beforeEach(function(){
+    beforeEach(function(done){
       rep = new PassThrough();
       server = fuserver(rep);
-      server.listen(PORT, HOST);
-      client = net.connect({port: PORT, host: HOST});
-      client.setEncoding('ascii');
+      server.listen(PORT, HOST, function(){
+        client = net.connect({port: PORT, host: HOST});
+        client.setEncoding('ascii');
+        done();
+      });
     });
 
     afterEach(function(){
@@ -139,15 +145,16 @@ module.exports = function(){
     it('should parse nicely when all tokens are sent at once', function(done){
       var rep = new PassThrough();
       var server = fuserver(rep);
-      server.listen(PORT, HOST);
 
       server.on('close', function(){
         done();
       });
 
-      var client = net.connect({port: PORT, host: HOST});
-      client.setEncoding('ascii');
-      client.write(flexunitResultSuccessXML + vars.END_OF_TEST_RUN_TOKEN);
+      server.listen(PORT, HOST, function(){
+        var client = net.connect({port: PORT, host: HOST});
+        client.setEncoding('ascii');
+        client.write(flexunitResultSuccessXML + vars.END_OF_TEST_RUN_TOKEN);
+      });
     })
   });
 };
